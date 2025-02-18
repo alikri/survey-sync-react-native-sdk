@@ -71,7 +71,7 @@ npx expo install @react-native-community/datetimepicker react-native-modal-datet
 
 ## 💬 Contact
 
-If you encounter any issues apart from the ones mentioned above during SDK installation, feel free to reach out on [Discord](https://discordapp.com/users/alina_nosovets) – I'm happy to help!
+If you encounter any issues apart from the ones mentioned above during SDK installation, feel free to reach out on [Discord](https://discord.gg/GWCZThVX) – I'm happy to help!
 
 ## 💻 Contributing
 
