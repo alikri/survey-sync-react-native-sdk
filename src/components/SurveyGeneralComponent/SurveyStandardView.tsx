@@ -140,43 +140,21 @@ const SurveyStandardView = ({
   const handleNavigation = async (direction: number) => {
     // --------------- Going Forward ---------------
     if (direction === 1) {
-      const prevStoredResponse = storedResponse?.response || null;
-      const hasChanged = !compareResponses(response, prevStoredResponse);
-
-      if (hasChanged) {
-        const nextRefId = await handleSubmitResponse();
-        if (nextRefId === null) {
-          if (onFinishedSurvey) {
-            onFinishedSurvey(respondentId);
-          }
-          setRenderFinalPage(true);
-          return;
+      handleSubmitResponse();
+      if (currentQuestionIndex === questions.length - 1) {
+        if (onFinishedSurvey) {
+          onFinishedSurvey(respondentId);
         }
-        const nextQuestion = questions.find((q) => q.refId === nextRefId);
-        if (nextQuestion) {
-          setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-        }
+        setRenderFinalPage(true);
       } else {
-        const nextIndex = currentQuestionIndex + 1;
-        if (nextIndex <= questions.length) {
-          if (nextIndex === questions.length) {
-            await handleSubmitResponse();
-            if (onFinishedSurvey) {
-              onFinishedSurvey(respondentId);
-            }
-
-            setRenderFinalPage(true);
-            return;
-          }
-          setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-        }
+        setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       }
     } else if (currentQuestionIndex > 0) {
       const prevStoredResponse = storedResponse?.response || null;
       const hasChanged = !compareResponses(response, prevStoredResponse);
 
       if (hasChanged) {
-        await handleSubmitResponse();
+        handleSubmitResponse();
       }
 
       setCurrentQuestionIndex(currentQuestionIndex - 1);
